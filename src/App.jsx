@@ -181,15 +181,24 @@ const App = () => {
 
   // Window Compositions
   const openApp = (appId) => {
+    const isMobile = window.innerWidth <= 768;
+    const appWorkspaces = { kitty: 1, firefox: 2, neovim: 3 };
+    const targetWorkspace = isMobile ? (appWorkspaces[appId] || currentWorkspace) : currentWorkspace;
+
     setWindows(prev =>
       prev.map(w =>
         w.id === appId
-          ? { ...w, isOpen: true, workspace: currentWorkspace }
+          ? { ...w, isOpen: true, workspace: targetWorkspace }
           : w
       )
     );
     setActiveWindowId(appId);
-    addNotification('compositor', `Launched ${appId} on workspace ${currentWorkspace}`);
+
+    if (isMobile && appWorkspaces[appId]) {
+      setCurrentWorkspace(appWorkspaces[appId]);
+    }
+
+    addNotification('compositor', `Launched ${appId} on workspace ${targetWorkspace}`);
   };
 
   const closeApp = (appId) => {
@@ -481,14 +490,6 @@ const App = () => {
   return (
     <div 
       className={`compositor-root ${neonMode ? 'neon-enabled' : ''} ${!darkTheme ? 'light-theme' : ''}`}
-      style={{
-        width: '100vw',
-        height: '100vh',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column'
-      }}
     >
       {/* Desktop Wallpaper */}
       <div 

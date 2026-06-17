@@ -6,7 +6,16 @@
 [![Linux](https://img.shields.io/badge/OS-Arch_Linux-blue?logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Compositor](https://img.shields.io/badge/WM-Hyprland-gradient?logo=wayland&logoColor=white)](https://hyprland.org/)
 
-![Hyprland Portfolio Preview](public/screenshot.png)
+<table>
+  <tr>
+    <td align="center" width="60%"><b>Desktop Layout (Workspace 1)</b></td>
+    <td align="center" width="40%"><b>Mobile Layout (Workspace 2)</b></td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="public/screenshot.png" alt="Desktop View" /></td>
+    <td valign="top"><img src="public/screenshot-mobile.png" alt="Mobile View" /></td>
+  </tr>
+</table>
 
 An ultra-premium, interactive portfolio web application simulating the **Hyprland Wayland tiling window manager** environment. Modeled after popular Arch Linux desktop custom setups ("rices"), it showcases developer skills, coding files, and projects through a fully keyboard-driven desktop workspace environment.
 
@@ -20,6 +29,9 @@ An ultra-premium, interactive portfolio web application simulating the **Hyprlan
     Windows (Terminal, Neovim, and Firefox) use translucent base variables and `.glass` classes with `backdrop-filter: blur(16px) saturate(180%)` to allow the wallpaper to shine through while keeping text completely readable. Works seamlessly across Light and Dark themes.
 *   🔄 **Auto-Wallpaper Rotator & Naming**:
     Features a built-in slideshow engine that auto-rotates the desktop wallpaper randomly every 30 seconds (complete with desktop notifications). Displays custom descriptive names (e.g. *Tokyo Neon*, *Synth Horizon*, *Deep Space*) for all 16 wallpapers in the SwayNC drawer.
+*   📱 **Mobile Navigation & Viewport Lock**:
+    *   **Anti-Overlap Viewport Lock**: Locked root sizing to `100dvh` (Dynamic Viewport Height) combined with `position: fixed` to completely prevent mobile browsers (like Chrome) from scrolling the top status bar Waybar off-screen behind the address bar.
+    *   **Single-App Desktop Slides**: On mobile viewports, opening an app from Wofi (or terminal) automatically moves the active workspace slide to that app's designated screen (`kitty` -> Workspace 1, `firefox` -> Workspace 2, `neovim` -> Workspace 3) and focuses it exclusively in full screen.
 *   🧩 **Dynamic Tiling Engine (Dwindle Split)**:
     Windows tile dynamically using binary space partitioning (BSP/Dwindle). Adding a window splits the workspace space horizontally or vertically with uniform window gaps and custom active gradient borders.
 *   🎹 **Web Audio API Keyclick Synthesizer**:
