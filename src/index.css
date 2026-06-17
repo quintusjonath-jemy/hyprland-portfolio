@@ -846,6 +846,12 @@ body {
     flex: none !important;
   }
 
+  .hypr-window:not(.floating-window):only-child {
+    height: 100% !important;
+    min-height: 100% !important;
+    flex: 1 !important;
+  }
+
   /* Adjust subcomponents to fit small screens */
   .kitty-terminal pre {
     font-size: 10px !important;
