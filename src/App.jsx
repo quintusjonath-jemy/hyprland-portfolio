@@ -10,6 +10,45 @@ import Kitty from './apps/Kitty';
 import Neovim from './apps/Neovim';
 import Firefox from './apps/Firefox';
 
+const WALLPAPERS = [
+  'aurora',
+  'bg1', 'bg2', 'bg3', 'bg4', 'bg5', 'bg6', 'bg7', 'bg8', 
+  'bg9', 'bg10', 'bg11', 'bg12', 'bg13', 'bg14', 'bg15', 'bg16'
+];
+
+const getWallpaperUrl = (name) => {
+  if (name === 'aurora') return '';
+  const jpegList = ['bg1', 'bg2', 'bg3', 'bg6', 'bg8', 'bg11', 'bg15'];
+  const ext = jpegList.includes(name) ? 'jpeg' : 'jpg';
+  return `${import.meta.env.BASE_URL}wallpapers/${name}.${ext}`;
+};
+
+const wallpaperThemes = {
+  aurora: true,
+  bg1: false, bg2: true, bg3: false, bg4: true, bg5: true, bg6: false, bg7: true, bg8: true,
+  bg9: false, bg10: true, bg11: true, bg12: true, bg13: true, bg14: true, bg15: false, bg16: true
+};
+
+const WALLPAPER_NAMES = {
+  aurora: 'Aurora Blobs',
+  bg1: 'Tokyo Neon',
+  bg2: 'Cyberpunk Alley',
+  bg3: 'Sunset Grid',
+  bg4: 'Synth Horizon',
+  bg5: 'Midnight Rain',
+  bg6: 'Sakura Dream',
+  bg7: 'Retro Wave',
+  bg8: 'Neon Shards',
+  bg9: 'Pastel Fog',
+  bg10: 'Cyber Grid',
+  bg11: 'City Skyline',
+  bg12: 'Digital Sunset',
+  bg13: 'Cosmic Dust',
+  bg14: 'Matrix Rain',
+  bg15: 'Light Sakura',
+  bg16: 'Deep Space'
+};
+
 const App = () => {
   // Desktop state
   const [currentWorkspace, setCurrentWorkspace] = useState(1);
@@ -21,6 +60,8 @@ const App = () => {
   const [audioMuted, setAudioMuted] = useState(false);
   const [animationsSpeed, setAnimationsSpeed] = useState('normal'); // 'normal' | 'fast'
   const [neonMode, setNeonMode] = useState(true);
+  const [darkTheme, setDarkTheme] = useState(true);
+  const [wallpaper, setWallpaper] = useState('aurora');
 
   // Desktop Notifications list
   const [notifications, setNotifications] = useState([
@@ -201,6 +242,30 @@ const App = () => {
       )
     );
   };
+
+  // Auto-select a random wallpaper and suitable theme on compositor boot
+  useEffect(() => {
+    const randomWp = WALLPAPERS[Math.floor(Math.random() * WALLPAPERS.length)];
+    setWallpaper(randomWp);
+    setDarkTheme(wallpaperThemes[randomWp] ?? true);
+  }, []);
+
+  // Auto-change wallpaper randomly every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const otherWallpapers = WALLPAPERS.filter(wp => wp !== wallpaper);
+      const randomWp = otherWallpapers[Math.floor(Math.random() * otherWallpapers.length)];
+      setWallpaper(randomWp);
+      setDarkTheme(wallpaperThemes[randomWp] ?? true);
+      addNotification(
+        'systemd', 
+        `Wallpaper rotated to: ${WALLPAPER_NAMES[randomWp] || randomWp}`, 
+        'info'
+      );
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [wallpaper]);
 
   // Handle global shortcuts (Super modifier simulated with Alt or Cmd/Meta)
   useEffect(() => {
@@ -415,7 +480,7 @@ const App = () => {
 
   return (
     <div 
-      className={`compositor-root ${neonMode ? 'neon-enabled' : ''}`}
+      className={`compositor-root ${neonMode ? 'neon-enabled' : ''} ${!darkTheme ? 'light-theme' : ''}`}
       style={{
         width: '100vw',
         height: '100vh',
@@ -426,14 +491,27 @@ const App = () => {
       }}
     >
       {/* Desktop Wallpaper */}
-      <div className="desktop-wallpaper" />
+      <div 
+        className="desktop-wallpaper" 
+        style={
+          wallpaper !== 'aurora' 
+            ? {
+                backgroundImage: `url(${getWallpaperUrl(wallpaper)})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }
+            : {}
+        }
+      />
 
       {/* Shifting Aurora Blobs */}
-      <div className="aurora-container">
-        <div className="aurora-blob blob-1" />
-        <div className="aurora-blob blob-2" />
-        <div className="aurora-blob blob-3" />
-      </div>
+      {wallpaper === 'aurora' && (
+        <div className="aurora-container">
+          <div className="aurora-blob blob-1" />
+          <div className="aurora-blob blob-2" />
+          <div className="aurora-blob blob-3" />
+        </div>
+      )}
 
       {/* Interactive Background Particles */}
       <BackgroundCanvas />
@@ -500,6 +578,17 @@ const App = () => {
         neonMode={neonMode}
         toggleNeonMode={() => {
           setNeonMode(!neonMode);
+          playClickSound(false);
+        }}
+        darkTheme={darkTheme}
+        toggleTheme={() => {
+          setDarkTheme(!darkTheme);
+          playClickSound(false);
+        }}
+        wallpaper={wallpaper}
+        changeWallpaper={(name) => {
+          setWallpaper(name);
+          setDarkTheme(wallpaperThemes[name] ?? true);
           playClickSound(false);
         }}
       />

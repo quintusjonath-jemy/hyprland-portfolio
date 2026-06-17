@@ -15,7 +15,14 @@ const Waybar = ({
   useEffect(() => {
     const updateTime = () => {
       const d = new Date();
-      setTimeStr(d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+      const isMobile = window.innerWidth <= 768;
+      setTimeStr(
+        d.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          ...(isMobile ? {} : { second: '2-digit' })
+        })
+      );
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -66,7 +73,7 @@ const Waybar = ({
           })}
         </div>
 
-        <div className="waybar-module" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+        <div className="waybar-module waybar-title-module" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
           <Terminal size={12} style={{ color: 'var(--teal)' }} />
           <span style={{ color: 'var(--subtext0)' }}>hyprland:</span>
           <span style={{ color: 'var(--lavender)' }}>{activeTitle}</span>

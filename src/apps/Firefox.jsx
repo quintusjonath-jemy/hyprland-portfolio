@@ -57,14 +57,14 @@ const Firefox = () => {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
-      backgroundColor: '#1e1e2e',
+      backgroundColor: 'var(--base)',
       color: 'var(--text)',
       fontFamily: 'var(--font-sans)'
     }}>
       {/* Firefox Browser Bar */}
       <div style={{
         height: '40px',
-        backgroundColor: '#11111b',
+        backgroundColor: 'var(--crust)',
         borderBottom: '1px solid var(--surface0)',
         display: 'flex',
         alignItems: 'center',
@@ -82,7 +82,7 @@ const Firefox = () => {
         <div style={{
           flex: 1,
           height: '26px',
-          backgroundColor: '#181825',
+          backgroundColor: 'var(--mantle)',
           borderRadius: '6px',
           border: '1px solid var(--surface0)',
           display: 'flex',
@@ -118,7 +118,7 @@ const Firefox = () => {
       <div style={{
         flex: 1,
         overflowY: 'auto',
-        backgroundColor: '#1e1e2e',
+        backgroundColor: 'var(--base)',
         padding: '24px'
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -141,7 +141,7 @@ const Firefox = () => {
                 onClick={() => setFilter(cat)}
                 style={{
                   background: filter === cat ? 'var(--mauve)' : 'var(--surface0)',
-                  color: filter === cat ? '#11111b' : 'var(--text)',
+                  color: filter === cat ? 'var(--crust)' : 'var(--text)',
                   border: 'none',
                   padding: '6px 14px',
                   borderRadius: '6px',
@@ -167,7 +167,7 @@ const Firefox = () => {
               <div 
                 key={idx}
                 style={{
-                  backgroundColor: '#181825',
+                  backgroundColor: 'var(--mantle)',
                   border: '1px solid var(--surface0)',
                   borderRadius: '10px',
                   padding: '18px',

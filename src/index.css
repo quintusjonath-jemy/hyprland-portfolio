@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
-
 :root {
-  /* Tokyo Night Neon Theme Color Scheme */
-  --base: #1a1b26;
-  --mantle: #16161f;
-  --crust: #101017;
+  /* Tokyo Night Neon Theme Color Scheme (Translucent for glassmorphism) */
+  --base: rgba(26, 27, 38, 0.4);
+  --mantle: rgba(22, 22, 31, 0.5);
+  --crust: rgba(16, 16, 23, 0.55);
+  --accent-text: #101017;
   --text: #c0caf5;
   --subtext0: #a9b1d6;
   --subtext1: #bac2de;
@@ -284,7 +284,7 @@ body {
 /* Window Header Decorator */
 .window-header {
   height: 36px;
-  background: rgba(16, 16, 23, 0.98);
+  background: rgba(16, 16, 23, 0.65);
   border-bottom: 1px solid var(--surface0);
   display: flex;
   align-items: center;
@@ -347,7 +347,7 @@ body {
 /* Window Body Content */
 .window-body {
   flex: 1;
-  background: rgba(26, 27, 38, 0.97);
+  background: transparent;
   border-radius: 0 0 var(--hypr-rounding) var(--hypr-rounding);
   overflow: auto;
   position: relative;
@@ -420,7 +420,7 @@ body {
 
 .workspace-dot.active {
   background: var(--pink);
-  color: var(--crust);
+  color: var(--accent-text);
   font-weight: bold;
   box-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
 }
@@ -509,12 +509,12 @@ body {
 
 .wofi-item.selected, .wofi-item:hover {
   background: var(--pink);
-  color: var(--crust);
+  color: var(--accent-text);
 }
 
 .neon-enabled .wofi-item.selected, .neon-enabled .wofi-item:hover {
   background: var(--cyan);
-  color: var(--crust);
+  color: var(--accent-text);
 }
 
 .wofi-item-name {
@@ -588,7 +588,7 @@ body {
 
 .swaync-quicksettings {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   padding: 12px 16px;
   background: var(--mantle);
@@ -613,12 +613,12 @@ body {
 
 .qs-btn.active {
   background: var(--pink);
-  color: var(--crust);
+  color: var(--accent-text);
 }
 
 .neon-enabled .qs-btn.active {
   background: var(--cyan);
-  color: var(--crust);
+  color: var(--accent-text);
 }
 
 .qs-btn:hover:not(.active) {
@@ -765,7 +765,7 @@ body {
 
 .contact-submit {
   background: var(--pink);
-  color: var(--crust);
+  color: var(--accent-text);
   border: none;
   padding: 6px;
   border-radius: 4px;
@@ -805,6 +805,19 @@ body {
     margin: 8px 8px 0 8px !important;
     padding: 0 8px !important;
     font-size: 11px !important;
+  }
+
+  .waybar-left, .waybar-right {
+    gap: 6px !important;
+  }
+
+  .waybar-module {
+    padding: 3px 6px !important;
+    gap: 4px !important;
+  }
+
+  .waybar-title-module {
+    display: none !important; /* Hide active title module to fit workspaces and time */
   }
 
   .waybar-center {
@@ -875,4 +888,79 @@ body {
     top: calc(44px + 12px) !important;
     bottom: 12px !important;
   }
+}
+
+/* Light Theme Color Overrides (Tokyo Night Day - Translucent for glassmorphism) */
+.light-theme {
+  --base: rgba(240, 242, 246, 0.4);       /* Light Tokyo base */
+  --mantle: rgba(213, 214, 219, 0.5);     /* Light Tokyo mantle */
+  --crust: rgba(225, 226, 231, 0.55);      /* Light Tokyo crust */
+  --accent-text: #1a1b26;
+  --text: #2c3043;       /* Dark text */
+  --subtext0: #444b6a;   /* Subtext */
+  --subtext1: #565f89;   /* Subtext */
+  --surface0: #cbd0db;   /* Soft borders */
+  --surface1: #b4bbc8;   /* Interactive borders */
+  --surface2: #9fa6b5;   /* Active borders */
+  --overlay0: #3854a6;   /* Sky blue */
+  
+  /* Vibrant Accents adjusted for light theme readability */
+  --mauve: #7a5ccc;      /* Purple */
+  --blue: #1f6feb;       /* High-contrast blue */
+  --teal: #117a65;       /* Saturated mint */
+  --green: #22863a;      /* Dark green */
+  --yellow: #b07d00;     /* Dark yellow */
+  --peach: #d95f02;      /* Dark orange */
+  --red: #d73a49;        /* Saturated red */
+  
+  --hypr-inactive-border: #cbd0db;
+  --hypr-shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+.light-theme .desktop-wallpaper {
+  background: radial-gradient(circle at 50% 50%, #f4f6fa 0%, #cbd0db 100%);
+}
+
+.light-theme .desktop-wallpaper::before {
+  opacity: 0.02 !important;
+}
+
+.light-theme .aurora-blob {
+  opacity: 0.07 !important;
+}
+
+.light-theme .glass {
+  background: rgba(240, 242, 246, 0.7) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.light-theme .window-header {
+  background: rgba(213, 214, 219, 0.65) !important;
+}
+
+.light-theme .window-body {
+  background: transparent !important;
+}
+
+.light-theme .waybar-module {
+  background: rgba(240, 242, 246, 0.65) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+  color: var(--text) !important;
+}
+
+.light-theme .waybar-module:hover {
+  background: rgba(220, 224, 233, 0.95) !important;
+}
+
+.light-theme .waybar-workspaces {
+  background: rgba(207, 212, 226, 0.6) !important;
+}
+
+.light-theme .workspace-dot:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.light-theme .notification-card {
+  background: var(--crust) !important;
+  border-color: var(--surface0) !important;
 }

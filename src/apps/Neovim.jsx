@@ -205,7 +205,7 @@ const Neovim = () => {
     <div style={{
       display: 'flex',
       height: '100%',
-      backgroundColor: '#1e1e2e',
+      backgroundColor: 'var(--base)',
       color: 'var(--text)',
       fontFamily: 'var(--font-mono)'
     }}>
@@ -214,7 +214,7 @@ const Neovim = () => {
         <div style={{
           width: '200px',
           borderRight: '1px solid var(--crust)',
-          backgroundColor: '#181825',
+          backgroundColor: 'var(--mantle)',
           fontSize: '12px',
           padding: '12px 6px',
           display: 'flex',
@@ -275,13 +275,13 @@ const Neovim = () => {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#1e1e2e',
+        backgroundColor: 'var(--base)',
         overflow: 'hidden'
       }}>
         {/* Editor Buffer Line (Tab Bar) */}
         <div style={{
           height: '32px',
-          backgroundColor: '#181825',
+          backgroundColor: 'var(--mantle)',
           display: 'flex',
           alignItems: 'center',
           borderBottom: '1px solid var(--crust)',
@@ -318,7 +318,7 @@ const Neovim = () => {
                   gap: '6px',
                   cursor: 'pointer',
                   fontSize: '12px',
-                  backgroundColor: isSelected ? '#1e1e2e' : 'transparent',
+                  backgroundColor: isSelected ? 'var(--base)' : 'transparent',
                   borderRight: '1px solid var(--crust)',
                   color: isSelected ? 'var(--text)' : 'var(--overlay0)',
                   borderTop: isSelected ? '2px solid var(--mauve)' : 'none'
@@ -343,7 +343,7 @@ const Neovim = () => {
         {/* Neovim Status Line (Lualine style) */}
         <div style={{
           height: '22px',
-          backgroundColor: '#11111b',
+          backgroundColor: 'var(--crust)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -354,7 +354,7 @@ const Neovim = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{
               backgroundColor: 'var(--mauve)',
-              color: '#11111b',
+              color: 'var(--crust)',
               padding: '0 8px',
               fontWeight: 'bold',
               borderRadius: '2px'

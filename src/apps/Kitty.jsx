@@ -188,7 +188,7 @@ Window ID: 3 | Title: neovim (Code Editor) | Workspace: 3 | Floating: false`
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#11111b',
+        backgroundColor: 'var(--crust)',
         overflowY: 'auto'
       }}
     >
