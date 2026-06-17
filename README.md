@@ -12,7 +12,7 @@
     <td align="center" width="40%"><b>Mobile Layout (Workspace 2)</b></td>
   </tr>
   <tr>
-    <td valign="top"><img src="public/screenshot.png" alt="Desktop View" /></td>
+    <td valign="top"><img src="public/screenshot.png" alt="Desktop View" /><img src="public/Screenshot2.png" alt="Desktop View" /></td>
     <td valign="top"><img src="public/screenshot-mobile.png" alt="Mobile View" /></td>
   </tr>
 </table>
